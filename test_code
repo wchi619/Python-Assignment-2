@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# data file: a1_final_data
+test_data=usage_data_file
+echo "ur_wchi3.py test data file: ${test_data}"
+
+cat ${test_data}
+
+./ur_wchi3.py -h
+
+./ur_wchi3.py -l user ${test_data}
+./ur_wchi3.py -l host ${test_data}
+./ur_wchi3.py -u rchan -t daily ${test_data}
+./ur_wchi3.py -u rchan -t weekly ${test_data}
+./ur_wchi3.py -r 10.40.105.99 -t daily ${test_data}
+./ur_wchi3.py -r 10.40.105.99 -t weekly ${test_data}
+
+./ur_wchi3.py -l user ${test_data} -v
+./ur_wchi3.py -l host ${test_data} -v
+./ur_wchi3.py -u asmith -t daily ${test_data} -v
+./ur_wchi3.py -u asmith -t weekly ${test_data} -v
+./ur_wchi3.py -r 10.40.105.130 -t daily ${test_data} -v
+./ur_wchi3.py -r 10.40.105.130 -t weekly ${test_data} -v
