@@ -1,0 +1,64 @@
+=============================================================
+                  /***BEGIN ALGORITHM***/
+
+OPS435 Assignment 2 - Fall 2019
+Program: ur_wchi3.py
+Author: William Chi
+
+This program will parse main function arguments for CLI arguments and return the usage in seconds of users or remote IP's that have established a connection in the past. The program is capable of taking in multiple files and filter the files into readable content for the program to understand.
+
+=============================================================
+$ ./ur_wchi3.py -h
+usage: ur_wchi3.py [-h] [-l {user,host}] [-r RHOST]
+                   [-t {daily,weekly,monthly}] [-u USER] [-v]
+                   F [F ...]
+
+positional arguments:
+  F                     list of files to be processed
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l {user,host}, --list {user,host}
+                        generate username or remote host IP from the given
+                        file(s)
+  -r RHOST, --rhost RHOST
+                        usage report for the given remote host IP
+  -t {daily,weekly,monthly}, --type {daily,weekly,monthly}
+                        type of report: daily, weekly, or monthly
+  -u USER, --user USER  usage report for the given username
+  -v, --verbose         turn on output verbosity
+
+Copyright 2019 - William Chi
+=============================================================
+
+                  /***BEGIN PSEUDO CODE***/
+
+1. The program will contain 5 function definitions in order for our program to work:
+  a. get_login_rec(): 
+  Grabs the latest results of "last -Fwi" and stores to variable. The function will iterate through the contents and splits the string into a filtered list containing any line with length of 15 (which is the total length of the log per line.
+  b. other_login_recs(filelist):
+  Attempts to open other files, filter and return as list.
+  c. host_user(file_list):
+  This function will print the list of host IP's OR usernames depending on the --list call option.
+  d. daily(nstart, nend):
+  This function will list the days and total seconds a logged connection was active for.
+  e. weekly(nstart, nend):
+  This function will list the weeks and total seconds a logged connection was active for.
+  f. monthly(nstart, nend):
+  This function will list the months and total seconds a logged connection was active for.
+  g. create_records(file_list):
+  This function is the major component of the script. This function will perform the following after preparing an array of all data records unique to the option input and filter the record to only contain dates for date manipulation in a list. The steps are as follows:
+
+    /***BEGINNING OF START/END TIME LIST MANIPULATION PSEUDO CODE***/
+
+    1. Convert start & end dates from string into datetime format.
+    2. Convert the above into YYYY MM DD format (so we can sort and do date comparison later).
+    3. If start/end dates are the same, automatically add entries into the final lists since we don't need to do anything with it anymore, we are looking for the ones that don't match.
+    4. If the dates do not match, create a dummy entry for the start or end dates so we can subtract the dates later.
+    5. Convert current iteration start time to seconds, then add 24 hours (1 day) and convert to local time.
+    6. If the date of tomorrow, append the start/end dates to the list.
+    7. If tomorrow doesnt equal the end date (of the iteration, loop through the list and keep appending dummy dates until there are no more dummy dates to add.
+  h. verbose():
+  This function will output additional information for verbosity when the option call -v is performed.
+
+The function will also contain a main argument to start argument parser for our program, and call appropriate functions to begin the program after basic initial error checking.
