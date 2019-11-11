@@ -62,3 +62,5 @@ Copyright 2019 - William Chi
   This function will output additional information for verbosity when the option call -v is performed.
 
 The function will also contain a main argument to start argument parser for our program, and call appropriate functions to begin the program after basic initial error checking.
+
+William Chi
