@@ -273,7 +273,7 @@ def create_records(file_list):
                 tomorrow = time.strftime("%Y %m %d", tupule)
 
                 if tomorrow == convert_end:
-                    nend.append(tmp_string[:3] + out[3:])
+                    nend.append(tmp_string[:3] + end[3:])
                     nstart.append(tmp_string)
 
     #Correctly call function depending on --type option
