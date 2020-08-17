@@ -1,4 +1,4 @@
-# ops435-a2
+# ops435 - Python Assignment 2
 Fall 2019 Submission
 
 Name: William Chi
